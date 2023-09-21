@@ -3,6 +3,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 /////////////////////////////////////////////////////////////////////////////////
 
 import { NgModule } from '@angular/core';
@@ -46,7 +47,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
 
   ],
   providers: [],

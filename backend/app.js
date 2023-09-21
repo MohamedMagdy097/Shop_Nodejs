@@ -14,6 +14,11 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+//////////////
+const cors = require('cors');
+app.use(cors());
+//////////////
+
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');

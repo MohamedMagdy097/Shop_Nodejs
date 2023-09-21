@@ -37,14 +37,7 @@ input {
   margin-bottom: 15px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border: 1px solid #0f0;
-}
-input[type="textarea"] {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border: 1px solid #0f0;
+  border: 1px solid #00695C;
 }
 
 .bttn {
