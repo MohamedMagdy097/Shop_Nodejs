@@ -29,7 +29,7 @@ const store = new mongoDbStore({
   collection: 'sessions'
 
 });
-
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(

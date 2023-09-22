@@ -13,14 +13,17 @@ export class AddProductComponent implements OnInit {
   description!: string;
 
   constructor(private apiServe: ApiService) { }
+
   ngOnInit():void { 
   }
 
-  onSubmit():void {
-    this.apiServe.addProduct({title: this.title, imageUrl: this.imageUrl, price: this.price, description: this.description})
-    .subscribe((response) => {
-      console.log(response);
-    });
+  onSubmit():void {    
+    this.apiServe.addProduct({title: this.title,
+      imageUrl: this.imageUrl,
+      price: this.price,
+      description: this.description})
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
-
 }
