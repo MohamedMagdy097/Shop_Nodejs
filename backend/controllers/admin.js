@@ -9,6 +9,15 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
+// exports.getAddProduct = (req, res, next) => {
+//   //const user = req.user;
+//   const loggedIn = req.session.isLoggedIn;
+//   res.send({
+//     //user: user,
+//     isAuthenticated: loggedIn,
+//   });
+// };
+
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
@@ -27,7 +36,10 @@ exports.postAddProduct = (req, res, next) => {
       // console.log(result);
       console.log("Created Product");
       // res.redirect("/admin/products");
-      res.send({Message: "success"});
+      res.send({
+        word: "Product added successfully!",
+        route: "add-product"
+      });
     })
     .catch((err) => {
       console.log(err);

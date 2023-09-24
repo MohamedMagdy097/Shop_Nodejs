@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -12,18 +13,22 @@ export class AddProductComponent implements OnInit {
   price!: number;
   description!: string;
 
-  constructor(private apiServe: ApiService) { }
-
+  constructor(private apiServe: ApiService, private router: Router) { }
+  word!: string;
   ngOnInit():void { 
   }
 
   onSubmit():void {    
-    this.apiServe.addProduct({title: this.title,
+    this.apiServe.addProduct({      
+      title: this.title,
       imageUrl: this.imageUrl,
       price: this.price,
-      description: this.description})
-      .subscribe((response) => {
-        console.log(response);
-      });
+      description: this.description
+      })
+        .subscribe((response) => {
+          this.word = response.word;
+          this.router.navigate([response.route]);
+          console.log(response);
+        });
   }
 }

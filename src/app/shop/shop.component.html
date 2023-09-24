@@ -1,1 +1,37 @@
-<p>shop works!</p>
+<!-- <div class="container">
+  <button class="btn btn-primary float-end" (click)="changeLang()">{{lang}}</button>
+</div>
+<div class="row w-75 mt-5 mx-auto">
+  <input type="text" class="control-form" [(ngModel)]="searchValue">
+</div> -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+
+      <!-- movie card -->
+      <div class="card movie_card" *ngFor="let movie of allProducts">
+          <a [routerLink]="['/product', movie._id]">
+              <img [src]="movie.imageUrl" class="card-img-top" alt="...">
+          </a>
+          <div class="card-body">
+              <h5 class="card-title">{{movie.title}}</h5>
+              <!-- <p class="movie_info">{{movie.release_date}}</p> -->
+              <!-- <span class="movie_info float-right"><i class="fas fa-star"></i>{{movie.vote_average}}</span> -->
+              <p *ngIf="movie.showMovieDetails">{{movie.description}}</p>
+              <!-- <button class="btn btn-success d-block m-1" [disabled]="watchProp">watch</button> -->
+              <button class="btn btn-warning d-block m-1" (click)="toggleDetails(movie._id)">
+                  {{movie.showMovieDetails? 'Hide': 'See'}} Details
+              </button>
+          </div>
+      </div>
+
+  </div>
+</div>
+
+<!-- <div class="container my-5">
+<mat-paginator [length]="totalMovies"
+          [pageSize]="moviesPerPage"
+          aria-label="Select page"
+          (page)="changePage($event)">
+</mat-paginator>
+</div> -->

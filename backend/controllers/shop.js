@@ -4,13 +4,13 @@ const Order = require("../models/order");
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then((products) => {
-      console.log(products);
-      res.render("shop/product-list", {
-        prods: products,
-        pageTitle: "All Products",
-        path: "/products",
-        isAuthenticated: req.session.isLoggedIn,
-      });
+      // res.render("shop/product-list", {
+      //   prods: products,
+      //   pageTitle: "All Products",
+      //   path: "/products",
+      //   isAuthenticated: req.session.isLoggedIn,
+      // });
+      res.send(products);
     })
     .catch((err) => {
       console.log(err);
@@ -19,14 +19,16 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
+  console.log(prodId);
   Product.findById(prodId)
     .then((product) => {
-      res.render("shop/product-detail", {
-        product: product,
-        pageTitle: product.title,
-        path: "/products",
-        isAuthenticated: req.session.isLoggedIn,
-      });
+      // res.render("shop/product-detail", {
+      //   product: product,
+      //   pageTitle: product.title,
+      //   path: "/products",
+      //   isAuthenticated: req.session.isLoggedIn,
+      // });
+      res.send(product);
     })
     .catch((err) => console.log(err));
 };

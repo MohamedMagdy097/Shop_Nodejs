@@ -10,6 +10,15 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+// exports.getLogin = (req, res, next) => {
+//   //const user = req.user;
+//   const loggedIn = req.session.isLoggedIn;
+//   res.send({
+//     //user: user,
+//     isAuthenticated: loggedIn,
+//   });
+// }
+
 exports.getSignup = (req, res, next) => {
   res.render("auth/signup", {
     path: "/signup",
@@ -21,10 +30,16 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        return res.redirect("/login");
+        //return res.redirect("/login");
+        res.send({
+          //user: user,
+          isAuthenticated: false,
+          word: "E-mail not found.",
+        });
       }
       bcrypt
         .compare(password, user.password)
@@ -32,16 +47,34 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+
             return req.session.save((err) => {
               console.log(err);
-              res.redirect("/");
+              //res.redirect("/");
+              const s = req.session;
+              res.send({
+                session: s,
+                isAuthenticated: true,
+                word: "Loggedin!!",
+                route: "/"
+              });
             });
           }
-          res.redirect("/login");
+          //res.redirect("/login");
+          res.send({
+            //user: user,
+            isAuthenticated: false,
+            word: "Wrong Password"
+          });
         })
         .catch((err) => {
-          console.log(err);
-          res.redirect("/login");
+          // console.log(err);
+          // res.redirect("/login");
+          res.send({
+            //user: user,
+            isAuthenticated: false,
+            message: err
+          });
         });
     })
     .catch((err) => console.log(err));

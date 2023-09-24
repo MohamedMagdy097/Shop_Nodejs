@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-shop',
@@ -6,11 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit{
-  currentRoute: string = '';
+  allProducts: any;
 
-  constructor() { }
+  constructor(private apiServe: ApiService) { }
   ngOnInit(): void {
-    // this.currentRoute = this.routeService.getCurrentRoute();
-    // console.log(this.currentRoute);
+    this.apiServe.getProducts().subscribe((data: any) => {
+      this.allProducts = data;
+    })
+  }
+
+  showMovieDetails:Boolean = false;
+    
+  toggleDetails(movieId: any) {
+      for (const item of this.allProducts) {
+          if(item._id == movieId) {
+              item.showMovieDetails =! item.showMovieDetails;
+          }
+      }
   }
 }
