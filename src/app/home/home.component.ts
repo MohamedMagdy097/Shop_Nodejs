@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit {
   showMovieDetails:Boolean = false;
     
   toggleDetails(movieId: any) {
-      for (const item of this.books) {
-          if(item.id == movieId) {
-              item.showMovieDetails =! item.showMovieDetails;
-          }
-      }
+    for (const item of this.books) {
+        if(item.id == movieId) {
+            item.showMovieDetails =! item.showMovieDetails;
+        }
+    }
   }
 }

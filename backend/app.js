@@ -64,7 +64,7 @@ mongoose
     'mongodb+srv://dstr1:1357902468@mmagdydb.otulj0s.mongodb.net/ecommerce'
     )
   .then(result => {
-    app.listen(2000);
+    app.listen(3000);
   })
   .catch(err => {
     console.log(err);
