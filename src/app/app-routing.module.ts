@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   {path: 'shop', component: ShopComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'orders', component: OrdersComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
+  {path: 'edit-product/:id', component: EditProductComponent},
 
   {path: '**', component: PageNotFoundComponent}
 ];

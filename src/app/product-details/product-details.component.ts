@@ -10,13 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductDetailsComponent implements  OnInit {
   constructor(private route:ActivatedRoute, private apiServe: ApiService) { }
   product: any;
-  imageUrl!: string;
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.apiServe.getDetails(id).subscribe({
       next: (response) => {
         this.product = response;
-        this.imageUrl = response.imageUrl;
       }
     });
   }

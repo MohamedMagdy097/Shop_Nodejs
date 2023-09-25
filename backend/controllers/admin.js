@@ -69,6 +69,7 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
+  // console.log(req.body);
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
@@ -85,7 +86,11 @@ exports.postEditProduct = (req, res, next) => {
     })
     .then((result) => {
       console.log("UPDATED PRODUCT!");
-      res.redirect("/admin/products");
+      // res.redirect("/admin/products");
+      res.send({
+        word: "Product updated successfully!",
+        route: "edit-product/" + prodId
+      });
     })
     .catch((err) => console.log(err));
 };
@@ -108,10 +113,16 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
+  console.log(req.body);
+  console.log(prodId);
   Product.findByIdAndRemove(prodId)
     .then(() => {
       console.log("DESTROYED PRODUCT");
-      res.redirect("/admin/products");
+      // res.redirect("/admin/products");
+      res.send({
+        word: "Product deleted successfully!",
+        route: "admin-products"
+      });
     })
     .catch((err) => console.log(err));
 };

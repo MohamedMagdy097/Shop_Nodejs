@@ -23,6 +23,7 @@ import { AdminProductsComponent } from './admin-products/admin-products.componen
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     AdminProductsComponent,
     LoginComponent,
     RegisterComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

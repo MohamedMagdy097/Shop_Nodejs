@@ -13,8 +13,9 @@ export class AddProductComponent implements OnInit {
   price!: number;
   description!: string;
 
-  constructor(private apiServe: ApiService, private router: Router) { }
   word!: string;
+
+  constructor(private apiServe: ApiService, private router: Router) { }
   ngOnInit():void { 
   }
 

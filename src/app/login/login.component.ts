@@ -25,7 +25,7 @@ export class LoginComponent implements  OnInit {
         .subscribe((response) => {
           this.apiServe.setIsAuthenticated(response.isAuthenticated);
           this.word = response.word;
-          console.log(this.apiServe.isAuthenticated);
+
           //console.log(response);
           if (response.route) {
             this.router.navigate([response.route]);

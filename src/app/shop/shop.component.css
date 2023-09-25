@@ -5,6 +5,7 @@ img {
   pointer-events: none;
 }
 .movie_card{
+  background-color: rgb(230, 230, 230);
   padding: 0 !important;
   width: 22rem;
   margin:14px; 

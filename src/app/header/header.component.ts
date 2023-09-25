@@ -11,6 +11,6 @@ export class HeaderComponent implements OnInit {
   
   constructor(public apiServe: ApiService) { }
   ngOnInit(): void {
-    
   }
+
 }

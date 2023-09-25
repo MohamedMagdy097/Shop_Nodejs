@@ -18,7 +18,7 @@
           <li>
             <li><a *ngIf="!this.apiServe.isAuthenticated" routerLinkActive="active" id="login" routerLink="login">Login</a></li>
             <li><a *ngIf="!this.apiServe.isAuthenticated" routerLinkActive="active" id="register" routerLink="register">Register</a></li>
-            <li><a *ngIf="this.apiServe.isAuthenticated"  id="logout" routerLink="logout">Logout</a>
+            <li><a *ngIf="this.apiServe.isAuthenticated" (click)="this.apiServe.logout()" id="logout" routerLink="logout">Logout</a>
           </li>
       </ul>
   </div>
