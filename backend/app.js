@@ -27,8 +27,8 @@ const store = new mongoDbStore({
   //uri:'mongodb+srv://abdalrmanbadwy:W7qp1OI3fl2kktYc@cluster0.z40ugzh.mongodb.net/shop?retryWrites=true&w=majority',
   uri:'mongodb+srv://dstr1:1357902468@mmagdydb.otulj0s.mongodb.net/ecommerce',
   collection: 'sessions'
-
 });
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +40,7 @@ app.use(
     store: store
   })
 );
+
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();

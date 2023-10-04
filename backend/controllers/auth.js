@@ -87,7 +87,12 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: email })
     .then((userDoc) => {
       if (userDoc) {
-        return res.redirect("/signup");
+        // return res.redirect("/signup");
+        res.send({
+          isAuthenticated: false,
+          word: "E-mail exists!!",
+          route: "/signup"
+        });
       }
       return bcrypt
         .hash(password, 12)
@@ -100,7 +105,12 @@ exports.postSignup = (req, res, next) => {
           return user.save();
         })
         .then((result) => {
-          res.redirect("/login");
+          // res.redirect("/login");
+          res.send({
+            isAuthenticated: false,
+            word: "User Created!!",
+            route: "/login"
+          });
         });
     })
     .catch((err) => {

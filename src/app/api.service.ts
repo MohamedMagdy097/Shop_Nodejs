@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class ApiService {
   port: number = 3000;
-  isAuthenticated!: boolean;
+  isAuthenticated: boolean = true;
   
   // session!: any;
   // requestOptions = {
@@ -62,5 +62,7 @@ export class ApiService {
     return this.http.post(`http://localhost:${this.port}/admin/edit-product`, newProduct);
   }
 
-  
+  register(data: any): Observable<any> {
+    return this.http.post(`http://localhost:${this.port}/signup`, data);
+  }
 }
