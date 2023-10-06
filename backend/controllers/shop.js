@@ -2,34 +2,44 @@ const Product = require("../models/product");
 const Order = require("../models/order");
 
 exports.getProducts = (req, res, next) => {
-  Product.find()
-    .then((products) => {
-      // res.render("shop/product-list", {
-      //   prods: products,
-      //   pageTitle: "All Products",
-      //   path: "/products",
-      //   isAuthenticated: req.session.isLoggedIn,
-      // });
-      res.send(products);
+  var pageNumber = +req.query.pageNumber;
+  var pageSize = +req.query.pageSize;
+  var myQuery = Product.find();
+  var fetchedProducts;
+  if (pageNumber && pageSize) {
+    myQuery.skip(pageSize * (pageNumber - 1)).limit(pageSize);
+  }
+  myQuery
+    .then((productsData) => {
+      fetchedProducts = productsData;
+      return Product.count();
+    })
+    .then((productsCount) => {
+      res.send({
+        totalProducts: productsCount,
+        products: fetchedProducts,
+      });
     })
     .catch((err) => {
-      console.log(err);
+      res.send({
+        error: "Error getting product",
+      });
     });
 };
 
 exports.getProduct = (req, res, next) => {
-  const prodId = req.params.productId;
-  Product.findById(prodId)
-    .then((product) => {
-      // res.render("shop/product-detail", {
-      //   product: product,
-      //   pageTitle: product.title,
-      //   path: "/products",
-      //   isAuthenticated: req.session.isLoggedIn,
-      // });
-      res.send(product);
+  let prodId = parseInt(req.params.productId);
+  console.log(req.params.productId);
+  Product.find({ "id": prodId })
+    .then((singleProduct) => {
+      
+      res.send(singleProduct[0]);
+      
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log("Couldn't find data");
+    });
+  
 };
 
 exports.getIndex = (req, res, next) => {
@@ -65,13 +75,19 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
+  var user1 = req.body.user;
   Product.findById(prodId)
     .then((product) => {
-      return req.user.addToCart(product);
+      return user1.addToCart(product);
     })
     .then((result) => {
       console.log(result);
-      res.redirect("/cart");
+      // res.redirect("/cart");
+      console.log(user1);
+      res.send({
+        //user: user1,
+        word: "Added to cart"
+      });
     });
 };
 
@@ -80,7 +96,8 @@ exports.postCartDeleteProduct = (req, res, next) => {
   req.user
     .removeFromCart(prodId)
     .then((result) => {
-      res.redirect("/cart");
+      // res.redirect("/cart");
+      res.send({word: "Removed from cart"});
     })
     .catch((err) => console.log(err));
 };

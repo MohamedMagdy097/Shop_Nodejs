@@ -13,18 +13,32 @@
         <!-- Transparent Background -->
         <div class="ui-trans clearfix">
           <!-- Image -->
-          <img [src]="this.product.imageUrl" alt="" class="img-responsive" />
+          <img src={{this.path+selectedProduct.imageLink}} alt="" class="img-responsive" />
           <!-- Details -->
           <div class="ui-details clearfix">
+            <div style="margin-left: 22%;color: azure;font-size: x-small;">
             <!-- Movie Name -->
-            <h2>
-              <a href="#">{{ this.product.title }}</a>
-            </h2>
+            
+            
+            <br>
+            <br>
+            <br>
+            <h3 style="font-size :18px;">  {{ "Title: "+selectedProduct.title }} </h3>
+            <br>
+            
+            <h3 style="font-size :18px;">  {{ "Country: "+selectedProduct.country }} </h3>
+            <br>
+            <h3 style="font-size :18px;">  {{ "Language: "+selectedProduct.language }} </h3>
+            <br>
+            <h3 style="font-size :18px;">  {{ "No.Pages: "+selectedProduct.Pages }} </h3>
+            <br>
+            <h3 style="font-size :18px;">  {{ "Publish Year: "+selectedProduct.year }} </h3>
+
+            
+            </div>
             <!-- Labels -->
             <!-- Paragraph -->
-            <p>
-              {{ this.product.description }}
-            </p>
+           
             <!-- Heading -->
           </div>
         </div>
@@ -32,29 +46,24 @@
       <!-- Review -->
       <div class="ui-review">
         <!-- Heading -->
-        <h3>{{ this.product.title }}</h3>
+        <h3>{{"Published By: "+selectedProduct.author}}</h3>
         <!-- Paragraph -->
-        <p>
-          {{ this.product.description }}
+        <a href={{selectedProduct.link}}>
+        <p style="font-size: x-small;">
+          Click Me For More Details!
         </p>
+        </a>
 
-        <!-- <mat-chip-listbox aria-label="Fish selection"> -->
-        <!-- <div class="row">
-            <p
-              class="col badge bg-warning ourdisplay m-2"
-              *ngFor="let genre of moviesGenres"
-            >
-              {{ genre.name }}
-            </p>
-          </div> -->
+    
 
         <!-- </mat-chip-listbox> -->
         <!-- Buttons -->
-        <a href="#" class="ui-btn bg-red"
-          ><i class="fa fa-ticket"></i> Buy Tickets</a
+        <a href="#" class="ui-btn bg-red" routerLink="/shop"
+          ><i class="fa fa-dot-circle-o" ></i> Go Back</a
         >
-        <a href="#" class="ui-btn bg-green">
-          <i class="fa fa-dot-circle-o"></i> Buy DVDs</a>
+        <a class="ui-btn bg-green">
+          <i  (click)="this.add2Cart(this.selectedProduct)" class= "fa fa-book" >
+          </i> Buy Item</a>
       </div>
     </div>
   </div>

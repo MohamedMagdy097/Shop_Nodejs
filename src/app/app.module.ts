@@ -24,6 +24,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 
 @NgModule({
@@ -50,7 +53,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     MatFormFieldModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
 
   ],
   providers: [],

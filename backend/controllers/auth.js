@@ -51,9 +51,10 @@ exports.postLogin = (req, res, next) => {
             return req.session.save((err) => {
               console.log(err);
               //res.redirect("/");
-              const s = req.session;
+              const user = req.session.user;
+              console.log(req.session);
               res.send({
-                session: s,
+                user: user,
                 isAuthenticated: true,
                 word: "Loggedin!!",
                 route: "/"

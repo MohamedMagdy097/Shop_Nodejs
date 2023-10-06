@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 })
 
 export class ApiService {
-  port: number = 3000;
-  isAuthenticated: boolean = true;
+  port: number = 5000;
+  isAuthenticated!: boolean;
+  user!: any;
   
   // session!: any;
   // requestOptions = {
@@ -35,6 +36,10 @@ export class ApiService {
 
   setIsAuthenticated(value: boolean) {
     this.isAuthenticated = value;
+  }
+
+  setUser(value: any) {
+    this.user = value;
   }
 
   getProducts(): Observable<any> {
@@ -64,5 +69,37 @@ export class ApiService {
 
   register(data: any): Observable<any> {
     return this.http.post(`http://localhost:${this.port}/signup`, data);
+  }
+
+  //Steven
+
+
+
+
+  getAllMovies(pageNumber:number=1,pageSize:number=21): Observable<any> {
+    let querydata=`pageNumber=${pageNumber}&pageSize=${pageSize}`
+   return this.http.get(`http://localhost:${this.port}/shop/products?${querydata}`);
+ }
+ getMovieById(prodId: number): Observable<any> {
+  // console.log("Getting id")
+   return this.http.get(`http://localhost:${this.port}/shop/products/${prodId}`);
+   
+ }
+
+  searchAllMovie(movieName: string): Observable<any> {
+    if (movieName == '') {
+      return this.getAllMovies();
+    } else {
+      return this.http.get(
+        `http://localhost:${this.port}/shop/products?query=${movieName}`
+      );
+    }
+  }
+
+
+  // CART
+
+  addToCart(data: any): Observable<any> {
+    return this.http.post(`http://localhost:${this.port}/shop/cart`, data);
   }
 }

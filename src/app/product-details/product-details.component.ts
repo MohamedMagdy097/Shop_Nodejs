@@ -9,13 +9,31 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailsComponent implements  OnInit {
   constructor(private route:ActivatedRoute, private apiServe: ApiService) { }
-  product: any;
-  ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.apiServe.getDetails(id).subscribe({
-      next: (response) => {
-        this.product = response;
-      }
-    });
+
+  path:string ="../../assets/";
+  word!: string;
+  products: any[]=[];
+  
+  
+  selectedProduct:any;
+  ngOnInit():void{
+    let id =parseInt(this.route.snapshot.paramMap.get('id')!) || 1234;
+    // console.log("id", id);
+    this.apiServe.getMovieById(id).subscribe({next:(response)=>{
+      this.selectedProduct=response;
+      // console.log(this.selectedProduct);
+      }});
+    }
+  add2Cart(product: any) {
+    let obj = {
+      user: this.apiServe.user,
+      productId: product._id
+    }
+    this.apiServe.addToCart(obj).subscribe({next:(response)=>{
+      this.apiServe.setUser(response.user);
+      this.word = response.word;
+      console.log(response);
+    }});
+    
   }
 }

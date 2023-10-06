@@ -13,6 +13,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use(express.urlencoded({ extended: true }));
+
 
 //////////////
 const cors = require('cors');
@@ -25,10 +27,12 @@ const authRoutes = require('./routes/auth');
 
 const store = new mongoDbStore({
   //uri:'mongodb+srv://abdalrmanbadwy:W7qp1OI3fl2kktYc@cluster0.z40ugzh.mongodb.net/shop?retryWrites=true&w=majority',
-  uri:'mongodb+srv://dstr1:1357902468@mmagdydb.otulj0s.mongodb.net/ecommerce',
+  // uri:'mongodb+srv://dstr1:1357902468@mmagdydb.otulj0s.mongodb.net/ecommerce',
+  // collection: 'sessions'
+  uri:'mongodb+srv://stevenbahaa:Silver29z@cluster0.ytmnzlw.mongodb.net/Project',
   collection: 'sessions'
-});
 
+});
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,7 +44,6 @@ app.use(
     store: store
   })
 );
-
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
@@ -54,19 +57,23 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
-app.use(shopRoutes);
+app.use('/shop',shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
 
 mongoose
   .connect(
-    //'mongodb+srv://abdalrmanbadwy:W7qp1OI3fl2kktYc@cluster0.z40ugzh.mongodb.net/shop?retryWrites=true&w=majority'
-    'mongodb+srv://dstr1:1357902468@mmagdydb.otulj0s.mongodb.net/ecommerce'
+    'mongodb+srv://stevenbahaa:Silver29z@cluster0.ytmnzlw.mongodb.net/Project'
     )
   .then(result => {
-    app.listen(3000);
+    console.log("DataBase Connected!");
   })
   .catch(err => {
+    console.log("DataBase NOT Connected!");
     console.log(err);
+  });
+
+  app.listen(5000, function () {
+    console.log("server connected");
   });

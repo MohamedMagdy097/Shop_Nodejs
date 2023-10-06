@@ -30,6 +30,8 @@ export class LoginComponent implements  OnInit {
           if (response.route) {
             this.router.navigate([response.route]);
           }
+          console.log(response.user);
+          this.apiServe.setUser(response.user);
         });
   }
 }
