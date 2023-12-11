@@ -13,7 +13,7 @@
         <!-- Transparent Background -->
         <div class="ui-trans clearfix">
           <!-- Image -->
-          <img src={{this.path+selectedProduct.imageLink}} alt="" class="img-responsive" />
+          <img src={{path+selectedProduct.imageLink}} alt="" class="img-responsive" />
           <!-- Details -->
           <div class="ui-details clearfix">
             <div style="margin-left: 22%;color: azure;font-size: x-small;">
@@ -58,12 +58,12 @@
 
         <!-- </mat-chip-listbox> -->
         <!-- Buttons -->
-        <a href="#" class="ui-btn bg-red" routerLink="/shop"
+        <a class="ui-btn bg-red" routerLink="/shop"
           ><i class="fa fa-dot-circle-o" ></i> Go Back</a
         >
-        <a class="ui-btn bg-green">
-          <i  (click)="this.add2Cart(this.selectedProduct)" class= "fa fa-book" >
-          </i> Buy Item</a>
+        <a class="ui-btn bg-green" routerLink="/shop" (click)="this.addprod(selectedProduct)"
+          ><i class= "fa fa-book" ></i> Buy Item</a
+        >
       </div>
     </div>
   </div>

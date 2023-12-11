@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
 })
 
 export class ApiService {
-  port: number = 5000;
+  port: number = 3000;
   isAuthenticated!: boolean;
-  user!: any;
   
   // session!: any;
   // requestOptions = {
@@ -38,10 +37,6 @@ export class ApiService {
     this.isAuthenticated = value;
   }
 
-  setUser(value: any) {
-    this.user = value;
-  }
-
   getProducts(): Observable<any> {
     return this.http.get(`http://localhost:${this.port}/products`);
   }
@@ -67,14 +62,30 @@ export class ApiService {
     return this.http.post(`http://localhost:${this.port}/admin/edit-product`, newProduct);
   }
 
-  register(data: any): Observable<any> {
-    return this.http.post(`http://localhost:${this.port}/signup`, data);
-  }
 
   //Steven
 
+  cart:any[] = [{author: "",
+    country: "",
+    id: 0,
+    imageLink : "",
+    language: "",
+    link : "",
+    pages: 0,
+    price: 0,
+    title : "",
+    year: 0,
+    _id:""}];
+  addprod(prod:any):void{
+    this.cart.push(prod);
+}
+deleteprod(prod:any):void{
+    this.cart = this.cart.filter(item => item !== prod);
+  }
 
-
+  register(data: any): Observable<any> {
+    return this.http.post(`http://localhost:${this.port}/signup`, data);
+  }
 
   getAllMovies(pageNumber:number=1,pageSize:number=21): Observable<any> {
     let querydata=`pageNumber=${pageNumber}&pageSize=${pageSize}`
@@ -83,7 +94,7 @@ export class ApiService {
  getMovieById(prodId: number): Observable<any> {
   // console.log("Getting id")
    return this.http.get(`http://localhost:${this.port}/shop/products/${prodId}`);
-   
+  
  }
 
   searchAllMovie(movieName: string): Observable<any> {
@@ -95,11 +106,10 @@ export class ApiService {
       );
     }
   }
-
-
-  // CART
-
-  addToCart(data: any): Observable<any> {
-    return this.http.post(`http://localhost:${this.port}/shop/cart`, data);
-  }
+  // omar
+  // addToCart(productId: number, product:any): Observable<any> {
+  //   return this.http.post(
+  //     `http://localhost:${this.port}/shop/products/${productId}`, product  
+  //   );
+  // }
 }

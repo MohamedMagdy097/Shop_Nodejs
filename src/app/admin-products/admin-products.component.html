@@ -5,12 +5,22 @@
   <input type="text" class="control-form" [(ngModel)]="searchValue">
 </div> -->
 
+<mat-paginator *ngIf="totalmovies"
+[length]="totalmovies"
+[pageSize]="moviesPerPage"
+[pageSizeOptions]="[5, 10, 21]"
+aria-label="Select page"
+(page)="changePage($event)"
+>
+</mat-paginator>
+
 <div class="parent container mt-5">
   <div class="row justify-content-center">
 
       <!-- movie card -->
       <div class="card movie_card" *ngFor="let movie of allProducts">
-          <img [src]="movie.imageUrl" class="card-img-top" alt="...">
+          <img src={{path+movie.imageLink}} class="card-img-top" alt="..."/>
+          
           <div class="card-body">
               <h5 class="card-title">{{movie.title}}</h5>
               <p>{{movie.price}} $</p>

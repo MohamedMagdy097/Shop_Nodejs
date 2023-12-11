@@ -51,10 +51,7 @@ exports.postLogin = (req, res, next) => {
             return req.session.save((err) => {
               console.log(err);
               //res.redirect("/");
-              const user = req.session.user;
-              console.log(req.session);
               res.send({
-                user: user,
                 isAuthenticated: true,
                 word: "Loggedin!!",
                 route: "/"
@@ -92,7 +89,7 @@ exports.postSignup = (req, res, next) => {
         res.send({
           isAuthenticated: false,
           word: "E-mail exists!!",
-          route: "/signup"
+          route: "/register"
         });
       }
       return bcrypt
@@ -118,6 +115,7 @@ exports.postSignup = (req, res, next) => {
       console.log(err);
     });
 };
+
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {

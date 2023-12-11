@@ -26,7 +26,6 @@ export class ShopComponent implements OnInit{
   currentPage: number = 1;
  
 
-  
   constructor(private movieService: ApiService) { }
 
   ngOnInit(): void {
@@ -38,7 +37,7 @@ export class ShopComponent implements OnInit{
         this.allData = this.allMovies;
         this.totalmovies = response.totalProducts;
         // console.log("total", this.totalmovies, response);
-    
+        console.log(this.allMovies);
       },
     });
   }
